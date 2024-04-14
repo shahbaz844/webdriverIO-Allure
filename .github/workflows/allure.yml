@@ -33,6 +33,9 @@ jobs:
           ref: gh-pages
           path: gh-pages
 
+      - name: List contents of gh-pages directory
+        run: ls -R gh-pages
+
       - name: Allure Report action from marketplace
         uses: simple-elf/allure-report-action@master
         if: always()

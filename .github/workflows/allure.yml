@@ -25,26 +25,15 @@ jobs:
       - name: Run all tests
         run: npm run wdio
           
-      - name: Get Allure history
-        uses: actions/checkout@v4
+      - name: Store Allure History
         if: always()
-        continue-on-error: true
-        with:
-          ref: gh-pages
-          path: gh-pages
+        run: |
+          mkdir -p allure-history
+          cp -r allure-report/history allure-history/
 
-      - name: Allure Report action from marketplace
-        uses: simple-elf/allure-report-action@master
-        if: always()
-        with:
-          allure_results: allure-results
-          allure_history: allure-history/allure-history
-          keep_reports: 5
-  
       - name: Deploy report to Github Pages
-        uses: peaceiris/actions-gh-pages@v4
         if: always()
+        uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_branch: gh-pages
-          publish_dir: allure-history/allure-history
+          publish_dir: allure-history

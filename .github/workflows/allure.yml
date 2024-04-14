@@ -43,6 +43,9 @@ jobs:
           allure_results: allure-results
           allure_history: allure-history/allure-history
           keep_reports: 10
+
+      - name: List all content after Allure Report action
+        run: ls -R
   
       - name: Deploy report to Github Pages
         uses: peaceiris/actions-gh-pages@v4

@@ -25,11 +25,11 @@ jobs:
       - name: Run all tests
         run: npm run wdio
           
-      - name: Store Allure History
-        if: always()
-        run: |
-          mkdir -p allure-history
-          cp -r allure-report/history allure-history/
+      # - name: Store Allure History
+      #   if: always()
+      #   run: |
+      #     mkdir -p allure-history
+      #     cp -r allure-report/history allure-history/
 
       - name: Clone GitHub Pages Branch
         run: |

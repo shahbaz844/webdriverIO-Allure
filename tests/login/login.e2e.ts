@@ -12,7 +12,7 @@ describe('Login application', () => {
         console.log("bbbbbbbb", process.env.PASSWORD)
         
         await loginPage.openLoginPage();
-        await browser.pause(20000);
+        await browser.pause(60000);
         await homePage.clickOnSignIn();
         allureReporter.addSeverity("Critical")
         await loginPage.performLogin(process.env.USERNAME, process.env.PASSWORD);

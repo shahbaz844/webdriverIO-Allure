@@ -35,10 +35,6 @@ jobs:
         run: |
           git clone --branch gh-pages --single-branch --depth 1 https://github.com/${{ github.repository }} allure-history
           cp -r allure-history/history allure-results/
-          cd allure-history/history
-          ls -R
-          cd allure-results/
-          ls -R
 
       # - name: List Directory Contents
       #   run: |
@@ -47,10 +43,10 @@ jobs:
       #     cd allure-results
       #     ls -R
           
-      # - name: List Folder Structure
-      #   run: |
-      #     cd $GITHUB_WORKSPACE
-      #     ls -R
+      - name: List Folder Structure
+        run: |
+          cd $GITHUB_WORKSPACE
+          ls -R
 
       - name: Deploy report to Github Pages
         if: always()

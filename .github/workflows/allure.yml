@@ -34,7 +34,7 @@ jobs:
       - name: Clone GitHub Pages Branch
         run: |
           git clone --branch gh-pages --single-branch --depth 1 https://github.com/${{ github.repository }} allure-history
-          cd allure-history
+          cd ./allure-history
           ls -R
           # cp -r allure-history/history allure-results/
 

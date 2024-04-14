@@ -44,7 +44,7 @@ jobs:
         if: always()
         with:
           allure_results: allure-results
-          allure_history: gh-pages/allure-history/allure-history
+          allure_history: ./gh-pages/history
           keep_reports: 10
 
       - name: List all content after Allure Report action

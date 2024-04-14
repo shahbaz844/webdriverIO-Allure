@@ -21,9 +21,19 @@ jobs:
       - name: Install dependencies
         run: |
           npm install
+
+      - name: Folders 1
+        run: |
+          cd ./work/webdriverIO-Allure/webdriverIO-Allure/
+          ls -R
             
       - name: Run all tests
         run: npm run wdio
+
+      - name: Folders 2
+        run: |
+          cd ./work/webdriverIO-Allure/webdriverIO-Allure/
+          ls -R
           
       - name: Get Allure history
         uses: actions/checkout@v4

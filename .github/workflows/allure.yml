@@ -10,47 +10,48 @@ jobs:
     env:
       USERNAME: ${{ secrets.LOGIN_USERNAME }}
       PASSWORD: ${{ secrets.LOGIN_PASSWORD }}
-        
+    
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-        
+      
       - name: Set up Node.js
         uses: actions/setup-node@v4
           
       - name: Install dependencies
         run: |
           npm install
-
-      
+            
       - name: Run all tests
         run: npm run wdio
-
-      - name: Clone GitHub Pages Branch
-        run: |
-          cd ~
-          cd ./work/webdriverIO-Allure/webdriverIO-Allure/
-          ls -R
-          git clone --branch gh-pages --single-branch --depth 1 https://github.com/${{ github.repository }} allure-history
-          cp -r ./allure-report/history allure-history/
-
-      - name: List Folder Structure
-        run: |
-          cd ~
-          # cd ./work/webdriverIO-Allure/webdriverIO-Allure/
-          # ls -R
-          cd ./work/webdriverIO-Allure/webdriverIO-Allure/allure-results
-          mkdir -p history
-          cd ~
-          cd ./work/webdriverIO-Allure/webdriverIO-Allure
-          cp -r allure-history/ allure-results/history
-          cd ~
-          cd ./work/webdriverIO-Allure/webdriverIO-Allure/allure-results/history
-          la -R
           
-      - name: Deploy report to Github Pages
+      - name: Download Allure history (previous run)
+        uses: actions/download-artifact@v3
         if: always()
+        with:
+          name: allure-history  # Name of the artifact containing history
+
+      - name: Unzip Allure history (optional)
+        if: always()
+        run: |  # Unzip if history is archived
+          unzip -q allure-history.zip || true  # Ignore errors if not zipped
+
+      - name: Copy Allure history to working directory
+        run: |
+          cp -r allure-history/* .
+
+      - name: Allure Report action from marketplace
+        uses: simple-elf/allure-report-action@master
+        if: always()
+        with:
+          allure_results: allure-results
+          allure_history: allure_history # Use current directory for history
+          keep_reports: 5
+  
+      - name: Deploy report to Github Pages
         uses: peaceiris/actions-gh-pages@v4
+        if: always()
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./allure-report
+          publish_branch: gh-pages
+          publish_dir: allure-history  # Folder containing report and history

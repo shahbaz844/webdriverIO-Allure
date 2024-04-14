@@ -34,12 +34,14 @@ jobs:
       - name: Clone GitHub Pages Branch
         run: |
           git clone --branch gh-pages --single-branch --depth 1 https://github.com/${{ github.repository }} allure-history
-          cd allure-history
+          cp -r allure-history/ allure-results/
           ls -R
 
       - name: List Directory Contents
         run: |
           cd allure-history
+          ls -R
+          cd allure-results
           ls -R
           
       # - name: List Folder Structure
@@ -52,5 +54,4 @@ jobs:
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: allure-history
-          keep_files: true
+          publish_dir: ./allure-results

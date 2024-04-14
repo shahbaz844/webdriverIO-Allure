@@ -8,6 +8,9 @@ describe('Login application', () => {
     const loginPage = new LoginPage();
 
     it('should login with valid credentials', async () => {
+        console.log("aaaaaaaa", process.env.USERNAME)
+        console.log("bbbbbbbb", process.env.PASSWORD)
+        
         await loginPage.openLoginPage();
         await homePage.clickOnSignIn();
         allureReporter.addSeverity("Critical")

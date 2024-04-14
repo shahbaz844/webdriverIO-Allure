@@ -25,7 +25,7 @@ export const config: Options.Testrunner = {
     capabilities: [{
         browserName: 'chrome',
         'goog:chromeOptions': {
-            args: [`--window-size=1200,700`]
+            args: ['--no-sandbox', '--headless']
         }
     }],
 

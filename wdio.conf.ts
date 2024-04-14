@@ -54,24 +54,24 @@ export const config: Options.Testrunner = {
         timeout: 120000
     },
 
-    onComplete: function() {
-        const reportError = new Error('Could not generate Allure report')
-        const generation = allure(['generate', 'allure-results', '--clean'])
-        return new Promise<void>((resolve, reject) => {
-            const generationTimeout = setTimeout(
-                () => reject(reportError),
-                5000)
+    // onComplete: function() {
+    //     const reportError = new Error('Could not generate Allure report')
+    //     const generation = allure(['generate', 'allure-results', '--clean'])
+    //     return new Promise<void>((resolve, reject) => {
+    //         const generationTimeout = setTimeout(
+    //             () => reject(reportError),
+    //             5000)
 
-            generation.on('exit', function(exitCode) {
-                clearTimeout(generationTimeout)
+    //         generation.on('exit', function(exitCode) {
+    //             clearTimeout(generationTimeout)
 
-                if (exitCode !== 0) {
-                    return reject(reportError)
-                }
-                resolve()
-            })
-        })
-    },
+    //             if (exitCode !== 0) {
+    //                 return reject(reportError)
+    //             }
+    //             resolve()
+    //         })
+    //     })
+    // },
 
     afterTest: async function(test, context, { error, result, duration, passed, retries }) {
         if (error) {

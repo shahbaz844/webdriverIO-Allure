@@ -1,1 +1,1 @@
-{"e040b6afa780768fd66d5e9d55194858":{"statistic":{"failed":0,"broken":1,"skipped":0,"passed":0,"unknown":0,"total":1},"items":[{"uid":"654b0ad4ae8a29e8","reportUrl":"https://shahbaz844.github.io/webdriverIO-Allure/9//#testresult/654b0ad4ae8a29e8","status":"broken","statusDetails":"Element <i class=\"fa fa-sign-in\" style=\"font-size: 16px;\"></i> not interactable","time":{"start":1713078435231,"stop":1713078501601,"duration":66370}}]}}
+{}

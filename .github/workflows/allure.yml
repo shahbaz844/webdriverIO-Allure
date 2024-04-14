@@ -34,8 +34,8 @@ jobs:
       - name: Clone GitHub Pages Branch
         run: |
           git clone --branch gh-pages --single-branch --depth 1 https://github.com/${{ github.repository }} allure-history
-          cd ./allure-history/history/
-          ls -R
+          ls -R allure-history
+          
 
       # - name: List Directory Contents
       #   run: |

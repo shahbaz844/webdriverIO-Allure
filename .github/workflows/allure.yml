@@ -36,12 +36,15 @@ jobs:
       - name: List contents of gh-pages directory
         run: ls -R gh-pages
 
+      - name: List contents out of gh-pages directory
+        run: ls -R
+
       - name: Allure Report action from marketplace
         uses: simple-elf/allure-report-action@master
         if: always()
         with:
           allure_results: allure-results
-          allure_history: ./gh-pages/history
+          allure_history: gh-pages/allure-history/allure-history
           keep_reports: 10
 
       - name: List all content after Allure Report action

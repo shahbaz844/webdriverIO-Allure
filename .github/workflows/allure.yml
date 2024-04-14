@@ -25,41 +25,32 @@ jobs:
       - name: Run all tests
         run: npm run wdio
           
-      # - name: Store Allure History
-      #   if: always()
-      #   run: |
-      #     mkdir -p allure-history
-      #     cp -r allure-report/history allure-history/
-
-      - name: Clone GitHub Pages Branch
+      - name: Preserve Allure History
         run: |
-          git clone --branch gh-pages --single-branch --depth 1 https://github.com/${{ github.repository }} allure-history
-          # ls -R allure-history
-          # cd ./allure-history
-          # cd history
-          # ls -R
-          cp -r ./allure-report/history allure-history/
-          
-          
-      # - name: List Directory Contents
-      #   run: |
-      #     cd allure-history
-      #     ls -R
-      #     cd allure-results
-      #     ls -R
-          
-      - name: List Folder Structure
-        run: |
-          cd ~
-          cd ./work/webdriverIO-Allure/webdriverIO-Allure/allure-results
-          mkdir -p history
-          cd ~
-          cd ./work/webdriverIO-Allure/webdriverIO-Allure
-          cp -r allure-history/ allure-results/history
+          mkdir -p allure-results/history
+          cp -r allure-report/history allure-results/
 
-      - name: Deploy report to Github Pages
-        if: always()
-        uses: peaceiris/actions-gh-pages@v4
+      - name: Clone gh-pages Branch
+        uses: actions/checkout@v4
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./allure-report
+          ref: gh-pages
+          path: gh-pages
+
+      - name: Copy Allure Report to gh-pages Branch
+        run: |
+          mkdir -p gh-pages/allure-report
+          cp -r allure-report/* gh-pages/allure-report
+
+      - name: Copy Allure History to gh-pages Branch
+        run: |
+          mkdir -p gh-pages/allure-history
+          cp -r allure-results/* gh-pages/allure-history
+
+      - name: Commit and Push Changes
+        run: |
+          cd gh-pages
+          git config user.name "${{ github.actor }}"
+          git config user.email "${{ github.actor }}@users.noreply.github.com"
+          git add .
+          git commit -m "Update Allure report"
+          git push origin gh-pages

@@ -1,2 +1,2 @@
 "Status","Start Time","Stop Time","Duration in ms","Parent Suite","Suite","Sub Suite","Test Class","Test Method","Name","Description"
-"passed","Sun Apr 14 08:08:32 GMT 2024","Sun Apr 14 08:09:47 GMT 2024","75446","","Login application","","","","should login with valid credentials",""
+"passed","Sun Apr 14 08:13:40 GMT 2024","Sun Apr 14 08:14:56 GMT 2024","76644","","Login application","","","","should login with valid credentials",""

@@ -25,7 +25,7 @@ export const config: Options.Testrunner = {
     capabilities: [{
         browserName: 'chrome',
         'goog:chromeOptions': {
-            args: ['--no-sandbox', '--headless']
+            args: ['--no-sandbox', '--headless', '--disable-notifications']
         }
     }],
 

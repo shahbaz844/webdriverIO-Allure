@@ -12,18 +12,13 @@ jobs:
       PASSWORD: ${{ secrets.LOGIN_PASSWORD }}
         
     steps:
-      - name: Step 1 - Echo out a GitHub Actions Secret to the logs
-        run: |
-          echo "Username"
-          echo ${{ secrets.LOGIN_USERNAME }}
-          echo "Password"
-          echo ${{ secrets.LOGIN_PASSWORD }}
-        
       - name: Checkout
         uses: actions/checkout@v3
         
       - name: Set up Node.js
         uses: actions/setup-node@v3
+        with:
+          node-version: '20'
           
       - name: Install dependencies
         run: |

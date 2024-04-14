@@ -48,7 +48,7 @@ jobs:
           
       - name: List Folder Structure
         run: |
-          cd ~ 
+          cd ./work/webdriverIO-Allure/webdriverIO-Allure/ 
           ls -R
 
       - name: Deploy report to Github Pages

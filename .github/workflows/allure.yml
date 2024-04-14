@@ -31,6 +31,16 @@ jobs:
           mkdir -p allure-history
           cp -r allure-report/history allure-history/
 
+      - name: List Directory Contents
+        run: |
+          cd allure-history
+          ls -R
+          
+      - name: List Folder Structure
+        run: |
+          cd $GITHUB_WORKSPACE
+          ls -R
+
       - name: Deploy report to Github Pages
         if: always()
         uses: peaceiris/actions-gh-pages@v4

@@ -77,13 +77,5 @@ export const config: Options.Testrunner = {
         if (error) {
             await browser.takeScreenshot();
         }
-    },
-
-    afterSession: function (result, capabilities, specs) {
-        fs.cp('./allure-report/history', './allure-results/history', { recursive: true }, (err) => {
-            if (err) {
-                console.error(err);
-            }
-        });
     }
 }

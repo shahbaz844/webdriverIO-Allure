@@ -33,22 +33,22 @@ jobs:
           ref: gh-pages
           path: gh-pages
 
-      - name: List contents of gh-pages directory
-        run: ls -R gh-pages
+      # - name: List contents of gh-pages directory
+      #   run: ls -R gh-pages
 
-      - name: List contents out of gh-pages directory
-        run: ls -R
+      # - name: List contents out of gh-pages directory
+      #   run: ls -R
 
       - name: Allure Report action from marketplace
         uses: simple-elf/allure-report-action@master
         if: always()
         with:
           allure_results: allure-results
-          allure_history: ./allure-history
+          allure_history: allure-history
           keep_reports: 10
 
-      - name: List all content after Allure Report action
-        run: ls -R
+      # - name: List all content after Allure Report action
+      #   run: ls -R
   
       - name: Deploy report to Github Pages
         uses: peaceiris/actions-gh-pages@v4
@@ -56,4 +56,4 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_branch: gh-pages
-          publish_dir: ./allure-history
+          publish_dir: allure-history

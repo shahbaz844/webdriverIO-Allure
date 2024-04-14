@@ -2,7 +2,7 @@ import Helpers from '../helpers';
 
 export class LoginPage extends Helpers {
 
-    private readonly usernameInput = '#emaill';
+    private readonly usernameInput = '#email';
     private readonly passwordInput= '#password';
     private readonly submit = 'button[type="submit"]';
 

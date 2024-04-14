@@ -8,8 +8,8 @@ jobs:
     runs-on: ubuntu-latest
     environment: allure
     env:
-      LOGIN_USERNAME: ${{ secrets.LOGIN_USERNAME }}
-      LOGIN_PASSWORD: ${{ secrets.LOGIN_PASSWORD }}
+      USERNAME: ${{ secrets.LOGIN_USERNAME }}
+      PASSWORD: ${{ secrets.LOGIN_PASSWORD }}
     
     steps:
       - name: Checkout

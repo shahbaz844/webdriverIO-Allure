@@ -10,11 +10,11 @@ jobs:
     env:
       USERNAME: ${{ secrets.LOGIN_USERNAME }}
       PASSWORD: ${{ secrets.LOGIN_PASSWORD }}
-    
+        
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      
+        
       - name: Set up Node.js
         uses: actions/setup-node@v4
           
@@ -25,27 +25,20 @@ jobs:
       - name: Run all tests
         run: npm run wdio
           
-      - name: Download Allure history (previous run)
-        uses: actions/download-artifact@v3
+      - name: Get Allure history
+        uses: actions/checkout@v4
         if: always()
+        continue-on-error: true
         with:
-          name: allure-history  # Name of the artifact containing history
-
-      - name: Unzip Allure history (optional)
-        if: always()
-        run: |  # Unzip if history is archived
-          unzip -q allure-history.zip || true  # Ignore errors if not zipped
-
-      - name: Copy Allure history to working directory
-        run: |
-          cp -r allure-history/* .
+          ref: gh-pages
+          path: gh-pages
 
       - name: Allure Report action from marketplace
         uses: simple-elf/allure-report-action@master
         if: always()
         with:
           allure_results: allure-results
-          allure_history: allure_history # Use current directory for history
+          allure_history: allure-history/allure-history
           keep_reports: 5
   
       - name: Deploy report to Github Pages
@@ -54,4 +47,4 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_branch: gh-pages
-          publish_dir: allure-history  # Folder containing report and history
+          publish_dir: allure-history/allure-history

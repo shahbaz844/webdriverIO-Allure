@@ -42,10 +42,10 @@ jobs:
           cd allure-history
           ls -R
           
-      - name: List Folder Structure
-        run: |
-          cd $GITHUB_WORKSPACE
-          ls -R
+      # - name: List Folder Structure
+      #   run: |
+      #     cd $GITHUB_WORKSPACE
+      #     ls -R
 
       - name: Deploy report to Github Pages
         if: always()

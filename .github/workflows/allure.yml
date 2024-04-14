@@ -34,10 +34,12 @@ jobs:
       - name: Clone GitHub Pages Branch
         run: |
           git clone --branch gh-pages --single-branch --depth 1 https://github.com/${{ github.repository }} allure-history
-          ls -R allure-history
-          cd ./allure-history
-          cd history
-          ls -R
+          # ls -R allure-history
+          # cd ./allure-history
+          # cd history
+          # ls -R
+          cp -r ./allure-report/history allure-history/
+          
           
       # - name: List Directory Contents
       #   run: |
@@ -49,8 +51,11 @@ jobs:
       - name: List Folder Structure
         run: |
           cd ~
-          cd ./work/webdriverIO-Allure/webdriverIO-Allure/ 
-          ls -R
+          cd ./work/webdriverIO-Allure/webdriverIO-Allure/allure-results
+          mkdir -p history
+          cd ~
+          cd ./work/webdriverIO-Allure/webdriverIO-Allure
+          cp -r allure-history/ allure-results/history
 
       - name: Deploy report to Github Pages
         if: always()

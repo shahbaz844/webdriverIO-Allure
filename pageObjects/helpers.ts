@@ -2,7 +2,6 @@
 export default class Helpers {
 
     protected async open(path: string): Promise<void> {
-        await browser.maximizeWindow();
         await browser.url(path);
     }
 

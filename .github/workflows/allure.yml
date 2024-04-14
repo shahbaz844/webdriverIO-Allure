@@ -12,6 +12,13 @@ jobs:
       PASSWORD: ${{ secrets.LOGIN_PASSWORD }}
         
     steps:
+      - name: Step 1 - Echo out a GitHub Actions Secret to the logs
+        run: |
+          echo "Username"
+          echo ${{ secrets.LOGIN_USERNAME }}
+          echo "Password"
+          echo ${{ secrets.LOGIN_PASSWORD }}
+        
       - name: Checkout
         uses: actions/checkout@v3
         
@@ -33,14 +40,11 @@ jobs:
           ref: gh-pages
           path: gh-pages
 
-      - name: Test marketplace action
+      - name: Allure Report action from marketplace
         uses: simple-elf/allure-report-action@master
         if: always()
-        id: allure-report
         with:
-          allure_results: build/allure-results
-          gh_pages: gh-pages
-          allure_report: allure-report
+          allure_results: allure-results
           allure_history: allure-history
           keep_reports: 10
   
@@ -50,4 +54,4 @@ jobs:
         with:
           PERSONAL_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PUBLISH_BRANCH: gh-pages
-          PUBLISH_DIR: allure-history
+          PUBLISH_DIR: ./allure-report

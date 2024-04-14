@@ -6,7 +6,7 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    environment: develop
+    environment: gh-pages
     env:
       LOGIN_USERNAME: ${{ secrets.LOGIN_USERNAME }}
       LOGIN_PASSWORD: ${{ secrets.LOGIN_PASSWORD }}

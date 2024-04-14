@@ -25,20 +25,16 @@ jobs:
       - name: Run all tests
         run: npm run wdio
           
-      - name: Get Allure history (previous run)
-        uses: actions/download-artifact@v4
+      - name: Store Allure History
         if: always()
-        with:
-          name: allure-history
-      
-      - name: Copy Allure history to working directory
         run: |
-          cp -r allure-history/* .
-      
-      - name: Allure Report action from marketplace
-        uses: simple-elf/allure-report-action@master
+          mkdir -p allure-history
+          cp -r allure-report/history allure-history/
+
+      - name: Deploy report to Github Pages
         if: always()
+        uses: peaceiris/actions-gh-pages@v4
         with:
-          allure_results: allure-results
-          allure_history: allure-history
-          keep_reports: 5
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: allure-history
+          keep_files: true
